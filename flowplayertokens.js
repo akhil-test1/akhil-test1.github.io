@@ -150,7 +150,7 @@ TokenGenerator.prototype.fetchTokens = function () {
       };
       // httpRequest.open('GET', 'http://localhost:9191'+'/get-tokens?uid='+this.uid);
       // httpRequest.open('GET', 'http://localhost:3000'+'/get-tokens?uid='+this.uid);
-      httpRequest.open('GET', 'https://7xgac0p6m7.execute-api.us-east-1.amazonaws.com/dev');
+      httpRequest.open('GET', 'https://ztgsr199h4.execute-api.ap-south-1.amazonaws.com/dev');
       httpRequest.send();
     }
   })
