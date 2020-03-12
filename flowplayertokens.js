@@ -119,29 +119,29 @@ TokenGenerator.prototype.fetchTokens = function () {
         try {
           if (httpRequest.readyState === XMLHttpRequest.DONE) {
             let ff=JSON.parse(httpRequest.response)
+            console.log(ff)
 
-            // console.log(httpRequest.response)
-            if (httpRequest.status === 200) {
+            // if (httpRequest.status === 200) {
               // var result = JSON.parse(httpRequest.responseText);
-              if (ff.statusCode == 200) {
-                let responseText = JSON.parse(httpRequest.responseText)
-                var myPassword = "akhilpassword";
+              // if (ff.statusCode == 200) {
+                // let responseText = JSON.parse(httpRequest.responseText)
+                // var myPassword = "akhilpassword";
                
-                let res =  JSON.parse(ff.body)
+                // let res =  JSON.parse(ff.body)
                 // console.log(res)
-                res.forEach(element => {
+                // ff.forEach(element => {
                   // var decrypted = CryptoJS.AES.decrypt(element, myPassword);
                   // let tkn = decrypted.toString(CryptoJS.enc.Utf8)
                   // console.log(element)
-                  _this.tokens.push(element)
-                });
+                  _this.tokens=ff
+                // });
                 _this.tokens = _this.tokens.filter(v => v != '');
                 resolve()
-              }
-            } else {
-              reject()
-              console.log('There was a problem with the token request.');
-            }
+              // }
+            // } else {
+            //   reject()
+            //   console.log('There was a problem with the token request.');
+            // }
           }
         } catch (e) {
           reject()
@@ -150,7 +150,7 @@ TokenGenerator.prototype.fetchTokens = function () {
       };
       // httpRequest.open('GET', 'http://localhost:9191'+'/get-tokens?uid='+this.uid);
       // httpRequest.open('GET', 'http://localhost:3000'+'/get-tokens?uid='+this.uid);
-      httpRequest.open('GET', 'https://ztgsr199h4.execute-api.ap-south-1.amazonaws.com/dev');
+      httpRequest.open('GET', 'https://gettokens.enfingettoken.workers.dev/');
       httpRequest.send();
     }
   })
