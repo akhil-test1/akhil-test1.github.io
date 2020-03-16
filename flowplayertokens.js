@@ -106,7 +106,7 @@ function TokenGenerator() {
 }
 
 TokenGenerator.prototype.fetchTokens = function () {
-  return new Promise((resolve, reject) => {
+ return new Promise((resolve, reject) => {
     if (this.tokens.length < (this.count / 2)) {
       var httpRequest = new XMLHttpRequest();
       var _this = this;
@@ -119,29 +119,15 @@ TokenGenerator.prototype.fetchTokens = function () {
         try {
           if (httpRequest.readyState === XMLHttpRequest.DONE) {
             let ff=JSON.parse(httpRequest.response)
-            console.log(ff)
-
-            // if (httpRequest.status === 200) {
-              // var result = JSON.parse(httpRequest.responseText);
-              // if (ff.statusCode == 200) {
-                // let responseText = JSON.parse(httpRequest.responseText)
-                // var myPassword = "akhilpassword";
-               
-                // let res =  JSON.parse(ff.body)
-                // console.log(res)
-                // ff.forEach(element => {
-                  // var decrypted = CryptoJS.AES.decrypt(element, myPassword);
-                  // let tkn = decrypted.toString(CryptoJS.enc.Utf8)
-                  // console.log(element)
-                  _this.tokens=ff
-                // });
+            console.log(ff,"tokens")
+            var __split=ff.split('?=')
+            let cipher2 = CryptoJS.AES.decrypt(__split[1], __split[0]);
+            let token___ =  cipher2.toString(CryptoJS.enc.Utf8).split(')')
+            token___.forEach(element => {
+              _this.tokens.push(element)
+            });
                 _this.tokens = _this.tokens.filter(v => v != '');
                 resolve()
-              // }
-            // } else {
-            //   reject()
-            //   console.log('There was a problem with the token request.');
-            // }
           }
         } catch (e) {
           reject()
